@@ -1,7 +1,23 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class SnowflakeCatcher extends PApplet {
+
 Snowflake [] powder;
 int sizeX=500;
 int sizeY=500;
-void setup()
+public void setup()
 {
   size(sizeX,sizeY);
   powder=new Snowflake[10];
@@ -11,7 +27,7 @@ void setup()
   }
   frameRate(200);
 }
-void draw()
+public void draw()
 {
   for(int i=0;i<powder.length;i++);
   {
@@ -22,7 +38,7 @@ void draw()
     powder[i].show();
   }
 } 
-void mouseDragged()
+public void mouseDragged()
 {
   //your code here
 }
@@ -37,13 +53,13 @@ class Snowflake
     myY=y;
     isMoving=true;
   }
-  void show()
+  public void show()
   {
     stroke(255);
     fill(255);
     ellipse(x,y,5,5);
   }
-  void lookDown()
+  public void lookDown()
   {
     if(y>0&&get(x,y+3)!=color(255))
     {
@@ -54,18 +70,18 @@ class Snowflake
       isMoving=true;
     }
   }
-  void erase()
+  public void erase()
   {
     stroke(0);
     fill(0);
     ellipse(x,y,0,0);
   }
-  void move()
+  public void move()
   {
     if(isMoving)
       y++;
   }
-  void wrap()
+  public void wrap()
   {
     if(y==sizeY)
     {
@@ -76,3 +92,12 @@ class Snowflake
 }
 
 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "SnowflakeCatcher" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
